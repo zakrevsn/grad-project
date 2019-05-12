@@ -1,0 +1,18 @@
+.fields-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.field {
+    display: grid;
+    grid-template-columns: repeat(10, auto);
+    grid-template-rows: repeat(10, auto);
+    justify-content: center;
+    grid-auto-flow: column;
+}
+
+.cell {
+    border: 1px solid grey;
+    width: 25px;
+    height: 25px;
+}

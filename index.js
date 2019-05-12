@@ -7,7 +7,8 @@ const cookieSession = require("cookie-session");
 const csurf = require("csurf");
 const { hashPassword, checkPassword } = require("./password");
 const server = require("http").Server(app);
-const io = require("socket.io")(server, {
+const io = require("./io");
+const socketio = require("socket.io")(server, {
     origins: "localhost:8080 name.herokuapp.com:*"
 });
 app.use(compression());
@@ -21,9 +22,10 @@ const cookieSessionMiddleware = cookieSession({
 });
 
 app.use(cookieSessionMiddleware);
-io.use(function(socket, next) {
+socketio.use(function(socket, next) {
     cookieSessionMiddleware(socket.request, socket.request.res, next);
 });
+socketio.on("connection", io.onConnect);
 
 app.use(csurf());
 
