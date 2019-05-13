@@ -17,7 +17,14 @@ class Field extends React.Component {
         let cells = [];
         for (let i = 0; i < this.props.size; i++) {
             for (let j = 0; j < this.props.size; j++) {
-                cells.push(<Cell key={JSON.stringify({ i, j })} x={i} y={j} />);
+                cells.push(
+                    <Cell
+                        myField={this.props.myField}
+                        key={JSON.stringify({ i, j })}
+                        x={i}
+                        y={j}
+                    />
+                );
             }
         }
         return <div className="field">{cells}</div>;

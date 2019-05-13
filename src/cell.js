@@ -13,6 +13,7 @@ class Cell extends React.Component {
         return (
             <div className="cell">
                 {this.props.x},{this.props.y}
+                {this.props.myField}
             </div>
         );
     }

@@ -1,6 +1,120 @@
-.fields-container {
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
+    background-color: #48b;
+}
+
+header {
+    flex-basis: 200px;
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    flex-grow: 1;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: white;
+}
+
+h1 {
+    background-color: white;
+    flex-grow: 0;
+}
+
+.sub-header {
+    flex-grow: 1;
+    align-self: stretch;
+    background: linear-gradient(#ffffff 50%, rgba(255, 255, 255, 0) 0) 0 0,
+        radial-gradient(
+                circle closest-side,
+                #ffffff 53%,
+                rgba(255, 255, 255, 0) 0
+            )
+            0 0,
+        radial-gradient(
+                circle closest-side,
+                #ffffff 50%,
+                rgba(255, 255, 255, 0) 0
+            )
+            55px 0 #48b;
+    background-size: 110px 100%;
+    background-repeat: repeat-x;
+}
+
+.pics-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* text-align: center; */
+}
+
+.pirates {
+    height: 50px;
+    width: 50px;
+}
+
+.anchor {
+    height: 50px;
+    width: 50px;
+}
+
+footer {
+    margin-top: 25px;
+    flex-basis: 100px;
+    flex-grow: 0;
+    display: flex;
+    /* grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr; */
+    /* align-content: space-between; */
+    /* align-content: center; */
+    padding-left: 100px;
+    padding-right: 100px;
+    justify-content: space-between;
+}
+
+.new-game {
+    height: 80px;
+    width: 80px;
+    border-radius: 40px;
+    border: 5px solid darkblue;
+}
+
+.quit {
+    height: 80px;
+    width: 80px;
+    border-radius: 40px;
+    border: 5px solid black;
+
+    /* display: block; */
+}
+.waves {
+    height: 50px;
+    width: 60px;
+    /* padding-left: 30px; */
+    /* display: block; */
+}
+
+.yellowsub {
+    height: 50px;
+    width: 60px;
+}
+
+main {
+    flex-grow: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    padding-top: 5%;
+}
+
+.fields-container {
+    display: flex;
+    /* grid-template-columns: 1fr 0.5fr 1fr; */
+    /* margin-left: 150px;
+    margin-right: 0; */
+    justify-content: space-around;
 }
 
 .field {
@@ -9,10 +123,15 @@
     grid-template-rows: repeat(10, auto);
     justify-content: center;
     grid-auto-flow: column;
+    outline: 2px solid black;
+    width: 350px;
+    height: 350px;
 }
 
 .cell {
-    border: 1px solid grey;
-    width: 25px;
-    height: 25px;
+    outline: 1px solid grey;
+    /* outline-color: solid black; */
+    width: 35px;
+    height: 35px;
+    background-color: white;
 }

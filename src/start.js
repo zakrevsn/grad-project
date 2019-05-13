@@ -17,10 +17,13 @@ init(store);
 ReactDOM.render(
     <Provider store={store}>
         <div>
-            <h1 className="site-header">Battleship</h1>
             <div className="fields-container">
-                <Field />
-                <Field />
+                <Field myField={true} />
+                <div className="pics-container">
+                    <img className="pirates" src="/images/pirates-filled.png" />
+                    <img className="anchor" src="/images/anchor-filled.png" />
+                </div>
+                <Field myField={false} />
             </div>
         </div>
     </Provider>,
