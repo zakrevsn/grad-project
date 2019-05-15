@@ -30,7 +30,7 @@ exports.filterGameForPlayer = function filterGameForPlayer(game, player) {
             ships: ships1,
             myShots: shots1,
             enemyShots: shots2,
-            turn,
+            myTurn: turn ? turn == player1 : null,
             outcome
         };
     }
@@ -40,7 +40,7 @@ exports.filterGameForPlayer = function filterGameForPlayer(game, player) {
             ships: ships2,
             myShots: shots2,
             enemyShots: shots1,
-            turn,
+            myTurn: turn ? turn == player2 : null,
             outcome
         };
     }

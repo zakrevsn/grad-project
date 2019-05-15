@@ -27,7 +27,22 @@ class Field extends React.Component {
                 );
             }
         }
-        return <div className="field">{cells}</div>;
+        let caption;
+        if (this.props.myTurn == null) {
+            if (this.props.myField) {
+                caption = "Place your ships";
+            } else {
+                caption = "Legend";
+            }
+        } else if (this.props.myTurn) {
+        }
+        return (
+            <div className="field-container">
+                <div className="field-caption">{caption}</div>
+
+                <div className="field">{cells}</div>
+            </div>
+        );
     }
 }
 
@@ -35,7 +50,7 @@ function mapStateToProps(state) {
     if (!state || !state.game) {
         return {};
     }
-    return { size: state.game.size };
+    return { size: state.game.size, myTurn: state.game.myTurn };
 }
 
 export default connect(mapStateToProps)(Field);

@@ -6,7 +6,8 @@ import reducer from "./reducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import { init } from "./socket";
-import App from "./app";
+import Play from "./play";
+import { Route, BrowserRouter, Link } from "react-router-dom";
 
 const store = createStore(
     reducer,
@@ -16,7 +17,25 @@ init(store);
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <div className="gamebody">
+            <header className="header">
+                <h1 className="site-header">Battleship</h1>
+                <div className="sub-header" />
+            </header>
+            <BrowserRouter>
+                <Route path="/play" component={Play} />
+            </BrowserRouter>
+            <footer className="footer">
+                <button className="new-game">NEW GAME</button>
+                <div>
+                    <img className="waves" src="/images/sea-waves.png" />
+                </div>
+                <div>
+                    <img className="yellowsub" src="/images/submarine2.png" />
+                </div>
+                <button className="quit">QUIT</button>
+            </footer>
+        </div>
     </Provider>,
     document.querySelector("main")
 );

@@ -24,6 +24,16 @@ h1 {
     flex-grow: 0;
 }
 
+.gamebody {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
+    background-color: #48b;
+}
+
 .sub-header {
     flex-grow: 1;
     align-self: stretch;
@@ -106,7 +116,6 @@ main {
     flex-grow: 1;
     display: grid;
     align-content: center;
-    padding-top: 5%;
 }
 
 .fields-container {
@@ -134,4 +143,17 @@ main {
     width: 35px;
     height: 35px;
     background-color: white;
+}
+.ship {
+    background-color: darkblue;
+}
+.shot {
+}
+.shot::before {
+    content: "◉";
+}
+.hit {
+}
+.hit::before {
+    content: "⨉";
 }
