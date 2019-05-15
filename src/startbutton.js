@@ -14,9 +14,14 @@ class StartButton extends React.Component {
     render() {
         if (this.props.myTurn == null) {
             return (
-                <button className="start" onClick={this.startGame}>
-                    Start
-                </button>
+                <div>
+                    <audio autoPlay="true" loop="true">
+                        <source src="/sounds/waves.mp3" type="audio/mpeg" />
+                    </audio>
+                    <button className="start" onClick={this.startGame}>
+                        Start
+                    </button>
+                </div>
             );
         } else {
             return null;
@@ -26,6 +31,8 @@ class StartButton extends React.Component {
     startGame() {
         console.log("Starting game");
         socket.emit("startGame");
+        let audio = new Audio("/sounds/bell.mp3");
+        audio.play();
     }
 }
 

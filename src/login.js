@@ -48,6 +48,8 @@ export default class Login extends React.Component {
             .post("/login", this.state)
             .then(() => {
                 this.props.history.push("/play");
+                let audio = new Audio("/sounds/bell.mp3");
+                audio.play();
             })
             .catch(res => {
                 ReactDOM.render(
