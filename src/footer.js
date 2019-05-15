@@ -37,7 +37,7 @@ class Footer extends React.Component {
     }
     quit() {
         console.log("quit");
-        socket.emit("quit");
+        window.location.replace("/logout");
     }
 }
 

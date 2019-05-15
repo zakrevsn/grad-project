@@ -2,18 +2,18 @@ var spicedPg = require("spiced-pg");
 
 var dbUrl =
     process.env.DATABASE_URL ||
-    "postgres:postgres:postgres@localhost:5432/gard-project";
+    "postgres:postgres:postgres@localhost:5432/battleship";
 var db = spicedPg(dbUrl);
 
-exports.addPlayer = function addPlayer(firstname, lastname, email, password) {
-    let q = `INSERT INTO players(firstname, lastname, email, password)
-    VALUES ($1, $2, $3, $4) RETURNING * `;
-    let params = [firstname, lastname, email, password];
+exports.addPlayer = function addPlayer(name, email, password) {
+    let q = `INSERT INTO players(name, email, password)
+    VALUES ($1, $2, $3) RETURNING * `;
+    let params = [name, email, password];
     return db.query(q, params);
 };
-exports.getPlayer = function getPlayer(playerId) {
-    let q = `SELECT * FROM players WHERE id=$1`;
-    let params = [playerId];
+exports.getPlayer = function getPlayer(email) {
+    let q = `SELECT * FROM players WHERE email=$1`;
+    let params = [email];
     return db.query(q, params);
 };
 exports.addGame = function addGame(game, player1Id, player2Id) {

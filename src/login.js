@@ -47,7 +47,7 @@ export default class Login extends React.Component {
         axios
             .post("/login", this.state)
             .then(() => {
-                location.replace("/play");
+                this.props.history.push("/play");
             })
             .catch(res => {
                 ReactDOM.render(

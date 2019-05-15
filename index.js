@@ -44,6 +44,62 @@ if (process.env.NODE_ENV != "production") {
 } else {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
+
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/");
+});
+
+app.post("/register", (req, res) => {
+    hashPassword(req.body.password)
+        .then(hash => {
+            db.addPlayer(req.body.name, req.body.email, hash)
+                .then(() => {
+                    res.status(200);
+                    res.end();
+                })
+                .catch(err => {
+                    res.status(500);
+                    res.end("An error occured. Please try again.");
+                    console.log("err in addUser: ", err);
+                });
+        })
+        .catch(err => {
+            res.status(500);
+            res.end("An error occured. Please try again.");
+            console.log("err in addUser: ", err);
+        });
+});
+
+app.post("/login", (req, res) => {
+    db.getPlayer(req.body.email)
+        .then(results => {
+            if (results.rows.length == 1) {
+                checkPassword(req.body.password, results.rows[0].password)
+                    .then(() => {
+                        req.session.name = results.rows[0].name;
+                        req.session.email = results.rows[0].email;
+                        req.session.userId = results.rows[0].id;
+
+                        res.status(200);
+                        res.end();
+                    })
+                    .catch(() => {
+                        res.status(401);
+                        res.end("Invalid email or password. Please try again.");
+                    });
+            } else {
+                res.status(401);
+                res.end("Invalid email or password. Please try again.");
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500);
+            res.end("An error occured. Please try again.");
+        });
+});
+
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");
 });
