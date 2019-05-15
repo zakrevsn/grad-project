@@ -9,7 +9,9 @@ import { init } from "./socket";
 import Play from "./play";
 import Footer from "./footer";
 import Header from "./header";
-import { Route, BrowserRouter, Link } from "react-router-dom";
+import Login from "./login";
+import Register from "./register";
+import { Route, BrowserRouter } from "react-router-dom";
 
 const store = createStore(
     reducer,
@@ -22,7 +24,11 @@ ReactDOM.render(
         <div className="gamebody">
             <Header />
             <BrowserRouter>
-                <Route path="/play" component={Play} />
+                <div className="router">
+                    <Route exact path="/" component={Login} />
+                    <Route path="/register" component={Register} />
+                    <Route path="/play" component={Play} />
+                </div>
             </BrowserRouter>
             <Footer />
         </div>
