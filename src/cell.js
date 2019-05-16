@@ -76,7 +76,7 @@ class Cell extends React.Component {
             return (
                 <div
                     onClick={
-                        this.props.myTurn == null && !ship
+                        this.props.myTurn == null && !this.props.ready && !ship
                             ? this.placeShip
                             : null
                     }

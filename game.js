@@ -31,7 +31,10 @@ exports.filterGameForPlayer = function filterGameForPlayer(game, player) {
             myShots: shots1,
             enemyShots: shots2,
             myTurn: turn ? turn == player1.playerId : null,
-            outcome
+            outcome,
+            ready: player1.ready,
+            otherPlayerReady: player2 ? player2.ready : null,
+            otherPlayer: player2 ? player2.name : null
         };
     }
     if (player == player2.playerId) {
@@ -41,7 +44,10 @@ exports.filterGameForPlayer = function filterGameForPlayer(game, player) {
             myShots: shots2,
             enemyShots: shots1,
             myTurn: turn ? turn == player2.playerId : null,
-            outcome
+            outcome,
+            ready: player2.ready,
+            otherPlayerReady: player1 ? player1.ready : null,
+            otherPlayer: player1 ? player1.name : null
         };
     }
 };

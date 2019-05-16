@@ -201,7 +201,7 @@ main {
 .fields-container {
     display: flex;
     justify-content: space-around;
-    cursor: url(images/target.png) 1 1, auto;
+    cursor: url(images/target.png) 12 12, auto;
 }
 
 .field {
@@ -255,3 +255,31 @@ main {
     left: 10px;
     content: "◉";
 } */
+.play {
+    position: relative;
+}
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+    position: absolute;
+    margin: 50px;
+    top: 50px;
+    left: 50px;
+    right: 50px;
+    bottom: 50px;
+    /* width: 70%;
+    height: 70%; */
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 40px;
+    /* overflow-y: scroll; */
+}

@@ -16,6 +16,7 @@ app.use(compression());
 app.use(require("body-parser").json());
 app.use(express.static("./public"));
 
+var nextSessionId = 0;
 const cookieSessionMiddleware = cookieSession({
     secret: `I'm always hungry.`,
     maxAge: 1000 * 60 * 60 * 24 * 14
@@ -80,6 +81,7 @@ app.post("/login", (req, res) => {
                         req.session.name = results.rows[0].name;
                         req.session.email = results.rows[0].email;
                         req.session.playerId = results.rows[0].id;
+                        req.session.sessionId = nextSessionId++;
 
                         res.status(200);
                         res.end();

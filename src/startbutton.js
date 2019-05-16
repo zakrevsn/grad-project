@@ -12,7 +12,7 @@ class StartButton extends React.Component {
     //     this.props.dispatch(());
     // }
     render() {
-        if (this.props.myTurn == null) {
+        if (!this.props.ready) {
             return (
                 <div>
                     <audio autoPlay={true} loop={true}>
@@ -23,16 +23,9 @@ class StartButton extends React.Component {
                     </button>
                 </div>
             );
-        }
-        // else  if () {
-        //     return (
-        //         <div className="victory-message">
-        //             {this.props.outcome + this.props.name}
-        //         </div>
-        //
-        //     );
-        // }
-        else {
+        } else if (this.props.myTurn == null) {
+            return <div className="turn">Waiting for other player</div>;
+        } else {
             return (
                 <div className="turn">
                     {this.props.myTurn ? "Your shot" : "Enemy shot"}
@@ -53,7 +46,7 @@ function mapStateToProps(state) {
     if (!state || !state.game) {
         return {};
     }
-    return { myTurn: state.game.myTurn };
+    return state.game;
 }
 
 export default connect(mapStateToProps)(StartButton);

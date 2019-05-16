@@ -3,11 +3,12 @@ import Field from "./field";
 import StartButton from "./startbutton";
 import { init } from "./socket";
 import { store } from "./start";
+import Endgame from "./endgame";
 
 export default function Play() {
     init(store);
     return (
-        <div>
+        <div className="play">
             <div className="fields-container">
                 <Field myField={true} />
                 <div className="pics-container">
@@ -17,6 +18,7 @@ export default function Play() {
                 </div>
                 <Field myField={false} />
             </div>
+            <Endgame />
         </div>
     );
 }
