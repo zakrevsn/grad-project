@@ -9,7 +9,7 @@ const { hashPassword, checkPassword } = require("./password");
 const server = require("http").Server(app);
 const io = require("./io");
 const socketio = require("socket.io")(server, {
-    origins: "localhost:8080 name.herokuapp.com:* 192.168.178.25:8080"
+    origins: "localhost:8080 name.herokuapp.com:* *:8080"
 });
 app.use(compression());
 

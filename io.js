@@ -37,8 +37,19 @@ exports.onConnect = function onConnect(socket) {
     // }
 };
 function onStartGame(game, player, socket) {
-    game.turn = player;
+    let otherSocket =
+        player == game.player1.playerId
+            ? game.player2.socket
+            : game.player1.socket;
+    let otherPlayer =
+        player == game.player1.playerId
+            ? game.player2.playerId
+            : game.player1.playerId;
+    if (!game.turn) {
+        game.turn = player;
+    }
     socket.emit("gameState", filterGameForPlayer(game, player));
+    otherSocket.emit("gameState", filterGameForPlayer(game, otherPlayer));
 }
 
 function onPlaceShip(game, player, place, socket) {
