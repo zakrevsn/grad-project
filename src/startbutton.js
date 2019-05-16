@@ -15,7 +15,7 @@ class StartButton extends React.Component {
         if (this.props.myTurn == null) {
             return (
                 <div>
-                    <audio autoPlay="true" loop="true">
+                    <audio autoPlay={true} loop={true}>
                         <source src="/sounds/waves.mp3" type="audio/mpeg" />
                     </audio>
                     <button className="start" onClick={this.startGame}>
@@ -24,7 +24,11 @@ class StartButton extends React.Component {
                 </div>
             );
         } else {
-            return null;
+            return (
+                <div className="turn">
+                    {this.props.myTurn ? "Your shot" : "Enemy shot"}
+                </div>
+            );
         }
     }
 

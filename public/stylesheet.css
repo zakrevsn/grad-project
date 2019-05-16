@@ -245,3 +245,9 @@ main {
     left: 10px;
     content: "⨉";
 }
+/* .miss::before {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    content: "◉";
+} */

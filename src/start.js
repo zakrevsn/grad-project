@@ -13,11 +13,10 @@ import Login from "./login";
 import Register from "./register";
 import { Route, BrowserRouter } from "react-router-dom";
 
-const store = createStore(
+export const store = createStore(
     reducer,
     composeWithDevTools(applyMiddleware(reduxPromise))
 );
-init(store);
 
 ReactDOM.render(
     <Provider store={store}>

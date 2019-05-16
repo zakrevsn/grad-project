@@ -54,6 +54,7 @@ class Cell extends React.Component {
         }
         if (this.props.myField) {
             let ship = false;
+            let shot = false;
             for (let i in this.props.ships) {
                 for (let j in this.props.ships[i]) {
                     if (
@@ -64,10 +65,27 @@ class Cell extends React.Component {
                     }
                 }
             }
+            for (let i in this.props.enemyShots) {
+                if (
+                    this.props.x == this.props.enemyShots[i].x &&
+                    this.props.y == this.props.enemyShots[i].y
+                ) {
+                    shot = true;
+                }
+            }
             return (
                 <div
-                    onClick={this.props.myTurn == null ? this.placeShip : null}
-                    className={"cell" + (ship ? " ship" : "")}
+                    onClick={
+                        this.props.myTurn == null && !ship
+                            ? this.placeShip
+                            : null
+                    }
+                    className={
+                        "cell" +
+                        (ship ? " ship" : "") +
+                        (shot ? " shot" : "") +
+                        (ship && shot ? " hit" : " miss")
+                    }
                 />
             );
         } else {
@@ -84,9 +102,11 @@ class Cell extends React.Component {
             }
             return (
                 <div
-                    onClick={this.shoot}
+                    onClick={this.props.myTurn && !shot ? this.shoot : null}
                     className={
-                        "cell" + (shot ? " shot" : "") + (hit ? " hit" : "")
+                        "cell" +
+                        (shot ? " shot" : "") +
+                        (hit ? " hit" : " miss")
                     }
                 />
             );

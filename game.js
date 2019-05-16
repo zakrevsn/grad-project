@@ -24,23 +24,23 @@ exports.filterGameForPlayer = function filterGameForPlayer(game, player) {
         turn,
         outcome
     } = game;
-    if (player == player1) {
+    if (player == player1.playerId) {
         return {
             size,
             ships: ships1,
             myShots: shots1,
             enemyShots: shots2,
-            myTurn: turn ? turn == player1 : null,
+            myTurn: turn ? turn == player1.playerId : null,
             outcome
         };
     }
-    if (player == player2) {
+    if (player == player2.playerId) {
         return {
             size,
             ships: ships2,
             myShots: shots2,
             enemyShots: shots1,
-            myTurn: turn ? turn == player2 : null,
+            myTurn: turn ? turn == player2.playerId : null,
             outcome
         };
     }
@@ -50,17 +50,31 @@ exports.findShips = function findShips(ships) {
     return ships;
 };
 
-exports.shoot = function shoot(game, x, y) {
-    if (game.turn == 1) {
-        game.shots1.push({ hit: false, sink: null, x, y });
-        game.turn = 2;
-    } else if (game.turn == 2) {
-        game.shots2.push({ hit: false, sink: null, x, y });
-        game.turn = 1;
-    }
-    return game;
-};
-
 exports.checkVictory = function checkVictory(game) {
-    return false;
+    let ships1 = 0,
+        sunk1 = 0,
+        ships2 = 0,
+        sunk2 = 0;
+    for (let i in game.ships1) {
+        ships1 += game.ships1[i].length;
+    }
+    for (let i in game.ships2) {
+        ships2 += game.ships2[i].length;
+    }
+    for (let i in game.shots2) {
+        if (game.shots2[i].hit) {
+            sunk1++;
+        }
+    }
+    for (let i in game.shots1) {
+        if (game.shots1[i].hit) {
+            sunk2++;
+        }
+    }
+    if (ships1 == sunk1) {
+        game.outcome = "The winner is " + game.player2.name;
+    }
+    if (ships2 == sunk2) {
+        game.outcome = "The winner is " + game.player1.name;
+    }
 };
