@@ -24,10 +24,12 @@ class Header extends React.Component {
                             className="periscope"
                             src="/images/periscope.png"
                         />
+
                         <img
                             className="cargoship"
                             src="/images/cargo-ship--v1.png"
                         />
+
                         <div className="containerfortwo">
                             <img
                                 className="albatross"

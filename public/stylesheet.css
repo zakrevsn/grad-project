@@ -113,8 +113,8 @@ h1 {
     width: 80px;
 }
 .cargoship {
-    height: 90px;
-    width: 90px;
+    height: 80px;
+    width: 80px;
 }
 
 .albatross {
@@ -209,7 +209,7 @@ main {
     grid-template-rows: repeat(10, auto);
     justify-content: center;
     grid-auto-flow: column;
-    outline: 2px solid black;
+    border: 2px solid black;
     width: 350px;
     height: 350px;
 }
@@ -238,12 +238,15 @@ main {
     content: "◉";
 }
 .hit {
+    width: 0px;
+    height: 0px;
 }
 .hit::before {
     position: absolute;
-    top: 9px;
-    left: 10px;
+    top: 7px;
+    left: 12px;
     content: "⨉";
+    font-weight: bold;
 }
 /* .miss::before {
     position: absolute;
