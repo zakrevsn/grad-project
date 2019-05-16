@@ -23,7 +23,16 @@ class StartButton extends React.Component {
                     </button>
                 </div>
             );
-        } else {
+        }
+        // else  if () {
+        //     return (
+        //         <div className="victory-message">
+        //             {this.props.outcome + this.props.name}
+        //         </div>
+        //
+        //     );
+        // }
+        else {
             return (
                 <div className="turn">
                     {this.props.myTurn ? "Your shot" : "Enemy shot"}
