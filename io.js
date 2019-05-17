@@ -23,6 +23,12 @@ exports.onConnect = function onConnect(socket) {
         ) {
             game = games[i];
             foundGame = true;
+
+            if (session.sessionId == games[i].player1.sessionId) {
+                games[i].player1.socket = socket;
+            } else {
+                games[i].player2.socket = socket;
+            }
         }
     }
     if (!foundGame) {
