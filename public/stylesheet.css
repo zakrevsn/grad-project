@@ -206,6 +206,16 @@ main {
 
 .field {
     display: grid;
+    grid-template-columns: repeat(11, auto);
+    grid-template-rows: repeat(11, auto);
+    justify-content: center;
+    grid-auto-flow: column;
+    width: 375px;
+    height: 375px;
+    text-align: center;
+}
+.cells-container {
+    display: grid;
     grid-template-columns: repeat(10, auto);
     grid-template-rows: repeat(10, auto);
     justify-content: center;
@@ -213,6 +223,8 @@ main {
     border: 2px solid black;
     width: 350px;
     height: 350px;
+    grid-column: 2 / 12;
+    grid-row: 2 / 12;
 }
 .field-caption {
     font-size: 30px;
@@ -225,36 +237,24 @@ main {
     width: 35px;
     height: 35px;
     background-color: white;
+    font-weight: bold;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .ship {
     background-color: darkblue;
 }
 .shot {
-    position: relative;
+    background-color: #48b;
 }
 .shot::before {
-    position: absolute;
-    top: 9px;
-    left: 10px;
     content: "◉";
-}
-.hit {
-    width: 0px;
-    height: 0px;
 }
 .hit::before {
-    position: absolute;
-    top: 7px;
-    left: 12px;
     content: "⨉";
-    font-weight: bold;
 }
-/* .miss::before {
-    position: absolute;
-    top: 9px;
-    left: 10px;
-    content: "◉";
-} */
 .play {
     position: relative;
 }
