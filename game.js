@@ -53,6 +53,16 @@ exports.filterGameForPlayer = function filterGameForPlayer(game, player) {
 };
 
 exports.findShips = function findShips(ships) {
+    let cells = 0;
+    for (let i in ships) {
+        cells += ships[i].length;
+    }
+    if (cells < 21) {
+        throw "Place more ships";
+    }
+    if (cells > 21) {
+        throw "Too many ships";
+    }
     return ships;
 };
 

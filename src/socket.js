@@ -1,5 +1,5 @@
 import * as io from "socket.io-client";
-import { gameState } from "./actions";
+import { gameState, shipFeedback } from "./actions";
 
 export let socket;
 
@@ -11,5 +11,10 @@ export function init(store) {
     socket.on("gameState", game => {
         console.log("gameState", game);
         store.dispatch(gameState(game));
+    });
+
+    socket.on("shipFeedback", message => {
+        console.log("shipFeedback", message);
+        store.dispatch(shipFeedback(message));
     });
 }

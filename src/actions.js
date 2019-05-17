@@ -4,3 +4,10 @@ export function gameState(game) {
         game
     };
 }
+
+export function shipFeedback(message) {
+    return {
+        type: "SHIP_FEEDBACK",
+        message
+    };
+}

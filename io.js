@@ -1,4 +1,9 @@
-const { createGame, filterGameForPlayer, checkVictory } = require("./game");
+const {
+    createGame,
+    filterGameForPlayer,
+    checkVictory,
+    findShips
+} = require("./game");
 
 let games = [];
 let pendingGame;
@@ -39,10 +44,14 @@ exports.onConnect = function onConnect(socket) {
     }
 
     socket.on("placeShip", place =>
-        onPlaceShip(game, session.playerId, place, socket)
+        onPlaceShip(game, session.playerId, place, socket, true)
     );
     socket.on("shoot", place => onShoot(game, session.playerId, place, socket));
+    socket.on("removeShip", place =>
+        onPlaceShip(game, session.playerId, place, socket, false)
+    );
     socket.on("startGame", () => onStartGame(game, session.playerId, socket));
+    socket.emit("shipFeedback", "Start placing your ships");
     socket.emit("gameState", filterGameForPlayer(game, session.playerId));
 
     if (!foundGame && pendingGame.player1 && pendingGame.player2) {
@@ -76,7 +85,7 @@ function onStartGame(game, player, socket) {
     otherSocket.emit("gameState", filterGameForPlayer(game, otherPlayer));
 }
 
-function onPlaceShip(game, player, place, socket) {
+function onPlaceShip(game, player, place, socket, add) {
     console.log("onPlaceShip", game, player, place);
     if (
         game.turn ||
@@ -88,7 +97,33 @@ function onPlaceShip(game, player, place, socket) {
         return;
     }
     let ships = player == game.player1.playerId ? game.ships1 : game.ships2;
-    ships.push([place]);
+    if (add) {
+        ships.push([place]);
+    } else {
+        for (let i in ships) {
+            for (let j in ships[i]) {
+                if (ships[i][j].x == place.x && ships[i][j].y == place.y) {
+                    ships[i].splice(j, 1);
+                    break;
+                }
+            }
+            if (ships[i].length == 0) {
+                ships.splice(i, 1);
+                break;
+            }
+        }
+    }
+    try {
+        ships = findShips(ships);
+        socket.emit("shipFeedback", null);
+    } catch (err) {
+        socket.emit("shipFeedback", err);
+    }
+    if (player == game.player1.playerId) {
+        game.ships1 = ships;
+    } else {
+        game.ships2 = ships;
+    }
     socket.emit("gameState", filterGameForPlayer(game, player));
 }
 function onShoot(game, player, place, socket) {
@@ -116,8 +151,16 @@ function onShoot(game, player, place, socket) {
             }
         }
     }
-
-    shots.push({ x: place.x, y: place.y, hit });
+    let alreadyHit = false;
+    for (let i in shots) {
+        if (shots[i].x == place.x && shots[i].y == place.y) {
+            alreadyHit = true;
+            break;
+        }
+    }
+    if (!alreadyHit) {
+        shots.push({ x: place.x, y: place.y, hit });
+    }
 
     if (!hit) {
         game.turn = otherPlayer;

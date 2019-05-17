@@ -4,5 +4,10 @@ export default function reducer(state, action) {
             game: action.game
         });
     }
+    if (action.type == "SHIP_FEEDBACK") {
+        return Object.assign({}, state, {
+            message: action.message
+        });
+    }
     return state;
 }

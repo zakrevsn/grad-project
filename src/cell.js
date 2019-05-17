@@ -33,6 +33,7 @@ class Cell extends React.Component {
         this.state = {};
         this.placeShip = this.placeShip.bind(this);
         this.shoot = this.shoot.bind(this);
+        this.removeShip = this.removeShip.bind(this);
     }
     // componentDidMount() {
     //     this.props.dispatch(());
@@ -76,8 +77,10 @@ class Cell extends React.Component {
             return (
                 <div
                     onClick={
-                        this.props.myTurn == null && !this.props.ready && !ship
-                            ? this.placeShip
+                        this.props.myTurn == null && !this.props.ready
+                            ? ship
+                                ? this.removeShip
+                                : this.placeShip
                             : null
                     }
                     className={
@@ -117,6 +120,9 @@ class Cell extends React.Component {
     }
     shoot() {
         socket.emit("shoot", { x: this.props.x, y: this.props.y });
+    }
+    removeShip() {
+        socket.emit("removeShip", { x: this.props.x, y: this.props.y });
     }
 }
 
